@@ -20,6 +20,5 @@ namespace DoToo.ViewModels
             Item.Completed = !Item.Completed;
             ItemStatusChanged?.Invoke(this, new EventArgs());
         });
-
     }
 }
