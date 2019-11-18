@@ -150,14 +150,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">
-      <Version>4.8.1</Version>
+      <Version>4.9.4</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\DoToo\DoToo.csproj">
-      <Project>{69506757-EEBF-4D40-89F9-810325FD9438}</Project>
+      <Project>{CF328C29-8E5E-4558-80A7-9C5413374ECE}</Project>
       <Name>DoToo</Name>
     </ProjectReference>
   </ItemGroup>

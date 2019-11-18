@@ -63,7 +63,11 @@ namespace DoToo.Repositories
 
             if (await connection.Table<TodoItem>().CountAsync() == 0)
             {
-                await connection.InsertAsync(new TodoItem() { Title = "Welcome to DoToo" });
+                await connection.InsertAsync(new TodoItem()
+                {
+                    Title = "Welcome to DoToo",
+                    Due = DateTime.Now
+                });
             }
         }
     }

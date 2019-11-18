@@ -351,3 +351,7 @@ ASALocalRun/
 .localhistory/
 
 # End of https://www.gitignore.io/api/visualstudio,xamarinstudio,visualstudiocode
+
+
+.DS_Store
+FodyWeavers.xsd

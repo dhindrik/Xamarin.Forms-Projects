@@ -1,16 +1,14 @@
-﻿using DoToo.Models;
-using DoToo.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Windows.Input;
+using DoToo.Models;
+using DoToo.Repositories;
 using Xamarin.Forms;
 
 namespace DoToo.ViewModels
 {
     public class ItemViewModel : ViewModel
     {
-        private TodoItemRepository repository;
+        private readonly TodoItemRepository repository;
 
         public TodoItem Item { get; set; }
 
