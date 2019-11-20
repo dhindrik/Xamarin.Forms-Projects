@@ -14,8 +14,8 @@ namespace News
             containerBuilder.RegisterType<MainShell>();
 
             containerBuilder.RegisterType<Navigator>().As<INavigate>();
-
             containerBuilder.RegisterAssemblyTypes(typeof(App).Assembly).Where(x => x.IsSubclassOf(typeof(ViewModel)));
+
 
             var container = containerBuilder.Build();
 

@@ -59,8 +59,9 @@ namespace DoToo.ViewModels
                 Task.Run(async () => await repository.UpdateItem(item.Item));
             }
 
-            }
-            public bool ShowAll { get; set; }
+        }
+
+        public bool ShowAll { get; set; }
 
         public ICommand AddItem => new Command(async () =>
         {

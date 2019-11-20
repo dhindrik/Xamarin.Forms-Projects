@@ -7,7 +7,7 @@ namespace News
         {
             get
             {
-                return "<<register on newsapi.org to get your API key>>";
+                 return "<<register on newsapi.org to get your API key>>";
             }
         }
     }

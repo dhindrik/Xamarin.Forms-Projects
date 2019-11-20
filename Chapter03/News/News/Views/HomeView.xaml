@@ -4,5 +4,9 @@
              Title="Home"
              x:Class="News.Views.HomeView">
     <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label FontSize="Large" Text="Welcome to News" />
+            <Label FontSize="Body" Text="This app is all about bringing you some kind of news and to teach you how to structure your navigation using Xamarin Forms Shell." />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

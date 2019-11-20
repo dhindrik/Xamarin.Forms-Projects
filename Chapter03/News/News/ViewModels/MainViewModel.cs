@@ -5,6 +5,7 @@ namespace News.ViewModels
     {
         public MainViewModel()
         {
+            
         }
     }
 }

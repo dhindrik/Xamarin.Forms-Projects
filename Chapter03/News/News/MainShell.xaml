@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="News.MainShell"
-
-       xmlns:views="clr-namespace:News.Views"
-       >
+       xmlns:views="clr-namespace:News.Views">
     <FlyoutItem Title="Home" Route="home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22, Color=Black}">
         <ShellContent ContentTemplate="{DataTemplate views:HomeView}" Title="Home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22}" />
 
@@ -14,8 +12,13 @@
     </FlyoutItem>
 
      <FlyoutItem Title="Settings" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf013;', Size=22, Color=Black}">
-        <ContentPage Title="Ducks" />
+        <ContentPage Title="Settings">
+            <StackLayout Margin="20">
+                <Label Text="Placeholder for settings" FontSize="Caption" />
+                <Label Text="Add controls here" FontSize="Body" />
+            </StackLayout>
+        </ContentPage>
     </FlyoutItem>
     
-    <MenuItem Text="About" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf05a;', Size=22, Color=Black}" />
+    <ShellContent ContentTemplate="{DataTemplate views:AboutView}" Title="About" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf05a;', Size=22, Color=Black}" />
 </Shell>
