@@ -4,17 +4,17 @@
              x:Class="Weather.Views.MainView_Phone" Title="{Binding City}">
     <ContentPage.Content>
         <RefreshView Command="{Binding Refresh}" IsRefreshing="{Binding IsRefreshing}">
-        <CollectionView ItemsSource="{Binding Days}" IsGrouped="True" 
+            <CollectionView ItemsSource="{Binding Days}" IsGrouped="True" 
                    BackgroundColor="Transparent">
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
                         <ContentView Padding="15,5" BackgroundColor="#9F5010">
                             <Label FontAttributes="Bold" TextColor="White" Text="{Binding DateAsString}" VerticalOptions="Center" />
                         </ContentView>
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
                         <Grid Padding="15,10" ColumnSpacing="10" BackgroundColor="#99FFFFFF">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -27,9 +27,14 @@
                             <Label Grid.Column="2" Text="{Binding Temperature, StringFormat='{0}°  C'}" VerticalOptions="Center" />
                             <Label Grid.Column="3" Text="{Binding Description}" VerticalOptions="Center" />
                         </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-                 </RefreshView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <!--<CollectionView.GroupFooterTemplate>
+                    <DataTemplate>
+                        <ContentView HeightRequest="0"></ContentView>
+                    </DataTemplate>
+                </CollectionView.GroupFooterTemplate>-->
+            </CollectionView>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>
