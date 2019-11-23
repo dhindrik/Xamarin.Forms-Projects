@@ -29,11 +29,11 @@
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <!--<CollectionView.GroupFooterTemplate>
+                <CollectionView.GroupFooterTemplate>
                     <DataTemplate>
                         <ContentView HeightRequest="0"></ContentView>
                     </DataTemplate>
-                </CollectionView.GroupFooterTemplate>-->
+                </CollectionView.GroupFooterTemplate>
             </CollectionView>
         </RefreshView>
     </ContentPage.Content>
