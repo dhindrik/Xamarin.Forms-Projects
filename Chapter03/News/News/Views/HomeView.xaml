@@ -4,9 +4,37 @@
              Title="Home"
              x:Class="News.Views.HomeView">
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Label FontSize="Large" Text="Welcome to News" />
-            <Label FontSize="Body" Text="This app is all about bringing you some kind of news and to teach you how to structure your navigation using Xamarin Forms Shell." />
+        <StackLayout Padding="14">
+            <!--<Label FontSize="Large" Text="Welcome to News" />
+            <Label FontSize="Body" Text="This app is all about bringing you some kind of news and to teach you how to structure your navigation using Xamarin Forms Shell." />-->
+
+            <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
+                            SelectedItem="{Binding SelectedItem}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding SelectionChanged}"
+                            >
+                <CollectionView.EmptyView>
+                    <Label Text="Loading" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid  Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                 <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label Text="{Binding PublishedAt}" Margin="2,9,-3,0" Grid.Row="0" FontSize="Small" />
+                            <Label Text="{Binding Title}" Margin="2,0" Grid.Row="1" FontSize="Large" />
+                            <Image Source="{Binding UrlToImage}" Aspect="AspectFill" HeightRequest="180" Grid.Row="2" Margin="0" />
+                            <BoxView BackgroundColor="Gray" Grid.Row="3" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

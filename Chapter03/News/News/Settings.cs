@@ -1,13 +1,14 @@
 ﻿using System;
 namespace News
 {
-    public class Settings
+    public static class Settings
     {
-        public string NewsApiKey
+        public static string NewsApiKey
         {
             get
-            { 
-                 return "<<register on newsapi.org to get your API key>>";
+            {
+                // todo remove before push to Packt
+                return "142b30001ea949fa8cb10e0f7cb4c463";
             }
         }
     }

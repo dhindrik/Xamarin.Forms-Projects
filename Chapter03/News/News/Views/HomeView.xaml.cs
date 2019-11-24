@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
+using News.ViewModels;
 using Xamarin.Forms;
 
 namespace News.Views
@@ -10,6 +11,7 @@ namespace News.Views
         public HomeView()
         {
             InitializeComponent();
+            BindingContext = Resolver.Resolve<HomeViewModel>();
         }
     }
 }
