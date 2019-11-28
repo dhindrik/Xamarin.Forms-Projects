@@ -9,10 +9,10 @@
             <Label FontSize="Body" Text="This app is all about bringing you some kind of news and to teach you how to structure your navigation using Xamarin Forms Shell." />-->
 
             <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
-                            SelectedItem="{Binding SelectedItem}"
                             SelectionMode="Single"
+                            SelectedItem="{Binding SelectedItem}"
                             SelectionChangedCommand="{Binding SelectionChanged}"
-                            >
+                >
                 <CollectionView.EmptyView>
                     <Label Text="Loading" />
                 </CollectionView.EmptyView>
@@ -20,16 +20,48 @@
                     <DataTemplate>
                         <Grid  Margin="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="15" />
+                                <RowDefinition Height="10" />
                                 <RowDefinition Height="1" />
+                         
                             </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
 
-                            <Label Text="{Binding PublishedAt}" Margin="2,9,-3,0" Grid.Row="0" FontSize="Small" />
-                            <Label Text="{Binding Title}" Margin="2,0" Grid.Row="1" FontSize="Large" />
-                            <Image Source="{Binding UrlToImage}" Aspect="AspectFill" HeightRequest="180" Grid.Row="2" Margin="0" />
-                            <BoxView BackgroundColor="Gray" Grid.Row="3" />
+                                <ColumnDefinition Width="65" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Label Text="{Binding PublishedAt}"
+                                   Padding="10"
+                                   Grid.Column="1"
+                                   Grid.Row="2"
+                                   FontSize="Small" />
+
+                            <Label Text="{Binding Title}"
+                                   Padding="10,0"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"/>
+
+                            <Frame Grid.Row="1"
+                                   Grid.RowSpan="2"
+                                   CornerRadius="15"
+                                   Padding="0"
+                                   Margin="5"
+                                   BackgroundColor="Green"
+                                   IsClippedToBounds="True">
+
+                                <Image Source="{Binding UrlToImage}"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+
+                            </Frame>
+
+                            <BoxView BackgroundColor="LightGray" Grid.Row="4" Grid.ColumnSpan="2" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

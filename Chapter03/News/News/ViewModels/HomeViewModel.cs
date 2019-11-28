@@ -31,7 +31,7 @@ namespace News.ViewModels
             => new Command(() =>
             {
                 var item = SelectedItem;
-                int i = 42;
+            
             });
     }
 }
