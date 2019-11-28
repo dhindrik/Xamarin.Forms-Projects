@@ -5,8 +5,32 @@
         <ShellContent ContentTemplate="{DataTemplate views:HomeView}" Title="Home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22}" />
 
         <Tab Title="News" Route="news" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf1ea;', Size=22}">
-            <ShellContent ContentTemplate="{DataTemplate views:LocalNewsView}" Title="Local" Route="local" />
-            <ShellContent ContentTemplate="{DataTemplate views:GlobalNewsView}" Title="Global" Route="global" />
+            <ShellContent Title="Local" Route="local">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:NewsView>
+                            <x:Arguments>
+                                <x:String>Local</x:String>
+                            </x:Arguments>
+                        </views:NewsView>
+                    </DataTemplate>
+                 </ShellContent.ContentTemplate>
+                </ShellContent>
+
+            <ShellContent Title="Global"
+                          Route="global">
+
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:NewsView>
+                            <x:Arguments>
+                                <x:String>Global</x:String>
+                            </x:Arguments>
+                        </views:NewsView>
+                    </DataTemplate>
+                 </ShellContent.ContentTemplate>
+
+            </ShellContent>
         </Tab>
         
     </FlyoutItem>

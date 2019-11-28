@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace News.Views
 {
-    public partial class GlobalNewsView : ContentPage
+    public partial class NewsView : ContentPage
     {
-        public GlobalNewsView()
+        public NewsView(string scope)
         {
             InitializeComponent();
         }

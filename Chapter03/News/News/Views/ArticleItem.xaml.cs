@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
 namespace News.Views
 {
-    public partial class LocalNewsView : ContentPage
+    public partial class ArticleItem : ContentView
     {
-        public LocalNewsView()
+        public ArticleItem()
         {
             InitializeComponent();
         }
