@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using News.Models;
 using News.Services;
+using News.Views;
 using Xamarin.Forms;
 
 namespace News.ViewModels
@@ -20,18 +22,17 @@ namespace News.ViewModels
 
         public async Task Initialize()
         {
-            CurrentNews = await newsService.GetNews();
+            CurrentNews = await newsService.GetNews(NewsScope.Headlines);
         }
 
         public NewsResult CurrentNews { get; set; }
 
-        public Article SelectedItem { get; set; }
-
         public ICommand SelectionChanged
-            => new Command(() =>
+            => new Command(async (selectedItem) =>
             {
-                var item = SelectedItem;
-            
+                var selectedArticle = selectedItem as Article;
+                var url = HttpUtility.UrlEncode(selectedArticle.Url);
+                await Navigation.NavigateTo($"articleview?url={url}");
             });
     }
 }

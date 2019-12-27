@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="News.MainShell"
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="News.MainShell"
        xmlns:views="clr-namespace:News.Views">
+
     <FlyoutItem Title="Home" Route="home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22, Color=Black}">
         <ShellContent ContentTemplate="{DataTemplate views:HomeView}" Title="Home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22}" />
 
         <Tab Title="News" Route="news" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf1ea;', Size=22}">
-            <ShellContent Title="Local" Route="local">
+            <ShellContent Title="Local" Route="local" >
                 <ShellContent.ContentTemplate>
                     <DataTemplate>
                         <views:NewsView>

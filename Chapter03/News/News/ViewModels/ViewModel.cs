@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace News.ViewModels
 {
@@ -18,11 +19,13 @@ namespace News.ViewModels
             }
         }
 
-        public INavigate Navigation { get; set; }
+        public INavigate Navigation { get; set; } = new Navigator();
     }
 
     public interface INavigate
     {
         Task NavigateTo(string route);
+        Task PushModal(Page page);
+        Task PopModal();
     }
 }

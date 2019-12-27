@@ -14,12 +14,18 @@ namespace News.ViewModels
         public NewsViewModel(NewsService newsService)
         {
             this.newsService = newsService;
-            Task.Run(Initialize);
         }
 
-        public async Task Initialize()
+        public async Task Initialize(string scope)
         {
-            CurrentNews = await newsService.GetNews();
+            var resolvedScope = scope.ToLower() switch
+            {
+                "local" => NewsScope.Local,
+                "global" => NewsScope.Global,
+                _ => NewsScope.Headlines
+            };
+
+            CurrentNews = await newsService.GetNews(resolvedScope);
         }
 
         public NewsResult CurrentNews { get; set; }

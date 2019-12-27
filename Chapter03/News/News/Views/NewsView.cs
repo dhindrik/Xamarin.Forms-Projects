@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
+using News.ViewModels;
 using Xamarin.Forms;
 
 namespace News.Views
@@ -10,6 +11,10 @@ namespace News.Views
         public NewsView(string scope)
         {
             InitializeComponent();
+
+            var viewModel = Resolver.Resolve<NewsViewModel>();
+            BindingContext = viewModel;
+            Task.Run(async () => await viewModel.Initialize(scope));
         }
     }
 }

@@ -4,15 +4,13 @@
              xmlns:views="clr-namespace:News.Views"
              x:Class="News.Views.NewsView">
     <ContentPage.Content>
- <StackLayout Padding="14">
-            <!--<Label FontSize="Large" Text="Welcome to News" />
-            <Label FontSize="Body" Text="This app is all about bringing you some kind of news and to teach you how to structure your navigation using Xamarin Forms Shell." />-->
+        <StackLayout Padding="14">
 
-            <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedItem}"
-                            SelectionChangedCommand="{Binding SelectionChanged}"
-                >
+             <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
+                             SelectionMode="Single"
+                             SelectedItem="{Binding SelectedItem}"
+                             SelectionChangedCommand="{Binding SelectionChanged}">
+
                 <CollectionView.EmptyView>
                     <Label Text="Loading" />
                 </CollectionView.EmptyView>
