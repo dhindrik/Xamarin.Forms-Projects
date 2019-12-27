@@ -8,8 +8,9 @@
 
              <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
                              SelectionMode="Single"
-                             SelectedItem="{Binding SelectedItem}"
-                             SelectionChangedCommand="{Binding SelectionChanged}">
+
+                             SelectionChangedCommand="{Binding SelectionChanged}"
+                             SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
 
                 <CollectionView.EmptyView>
                     <Label Text="Loading" />

@@ -9,10 +9,10 @@ namespace News
 {
     public partial class MainShell
     {
-        public MainShell(MainViewModel viewModel)
+        public MainShell()
         {
             InitializeComponent();
-            BindingContext = viewModel;
+           // BindingContext = viewModel;
 
             Routing.RegisterRoute("articleview", typeof(ArticleView));
         }

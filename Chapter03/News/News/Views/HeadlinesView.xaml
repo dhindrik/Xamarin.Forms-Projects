@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:News.Views"
              Title="Home"
-             x:Class="News.Views.HomeView">
+             x:Class="News.Views.HeadlinesView">
     <ContentPage.Content>
         <StackLayout Padding="14">
 

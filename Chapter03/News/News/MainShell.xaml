@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:News.Views">
 
     <FlyoutItem Title="Home" Route="home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22, Color=Black}">
-        <ShellContent ContentTemplate="{DataTemplate views:HomeView}" Title="Home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22}" />
+        <ShellContent ContentTemplate="{DataTemplate views:HeadlinesView}" Title="Headlines" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22}" />
 
         <Tab Title="News" Route="news" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf1ea;', Size=22}">
             <ShellContent Title="Local" Route="local" >
