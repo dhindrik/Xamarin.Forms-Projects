@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalleryApp.Models;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GalleryApp.ViewModels
@@ -16,6 +18,7 @@ namespace GalleryApp.ViewModels
         {
             this.photoImporter = photoImporter;
             this.localStorage = localStorage;
+
             Task.Run(Initialize);
         }
 
@@ -25,7 +28,7 @@ namespace GalleryApp.ViewModels
         {
             IsBusy = true;
 
-            Photos = await photoImporter.Import();
+            Photos = await photoImporter.Get(0,20);
 
             RaisePropertyChanged(nameof(Photos));
 
@@ -46,11 +49,14 @@ namespace GalleryApp.ViewModels
             }
         }
 
-        public ICommand AddFavorites => new Command<Photo>((photo) =>
+        public ICommand AddFavorites => new Command<List<Photo>>((photos) =>
         {
-            localStorage.Store(photo.Filename);
+            foreach (var photo in photos)
+            {
+                localStorage.Store(photo.Filename);
+            }
 
-            MessagingCenter.Send(this, "FavoriteAdded");
+            MessagingCenter.Send(this, "FavoritesAdded");
         });
 
         private int currentStartIndex = 0;

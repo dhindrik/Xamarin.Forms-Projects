@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace GalleryApp
@@ -13,9 +14,9 @@ namespace GalleryApp
         {
             if (Application.Current.Properties.ContainsKey(PropertyKey))
             {
-                var filenames = (List<string>)Application.Current.Properties[PropertyKey];
+                var filenames = (string)Application.Current.Properties[PropertyKey];
 
-                return filenames;
+                return JsonConvert.DeserializeObject<List<string>>(filenames);
             }
 
             return new List<string>();
@@ -23,21 +24,11 @@ namespace GalleryApp
 
         public async Task Store(string filename)
         {
-            List<string> filenames;
-
-            if(!Application.Current.Properties.ContainsKey(PropertyKey))
-            {
-                filenames = new List<string>();
-                Application.Current.Properties.Add(PropertyKey, filenames);
-            }
-            else
-            {
-                filenames = (List<string>)Application.Current.Properties[PropertyKey];
-            }
+            List<string> filenames = await Get();
 
             filenames.Add(filename);
 
-            Application.Current.Properties[PropertyKey] = filenames;
+            Application.Current.Properties[PropertyKey] = JsonConvert.SerializeObject(filenames);
 
             await Application.Current.SavePropertiesAsync();
         }

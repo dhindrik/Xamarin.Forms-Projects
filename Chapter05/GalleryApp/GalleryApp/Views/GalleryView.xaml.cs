@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using GalleryApp.Models;
 using GalleryApp.ViewModels;
 using Xamarin.Forms;
 
@@ -24,7 +26,7 @@ namespace GalleryApp.Views
             {
                 selectToolBarItem = new ToolbarItem();
 
-                selectToolBarItem.Command = ViewModel.AddFavorites;
+                selectToolBarItem.Clicked += SelectToolBarItem_Clicked;
 
                 ToolbarItems.Add(selectToolBarItem);
             }
@@ -36,8 +38,18 @@ namespace GalleryApp.Views
             else if(ToolbarItems.Count > 0)
             {  
                 ToolbarItems.Remove(selectToolBarItem);
+                selectToolBarItem.Clicked -= SelectToolBarItem_Clicked;
                 selectToolBarItem = null;
             }
+        }
+
+        private void SelectToolBarItem_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.AddFavorites.Execute(Photos.SelectedItems.Select(x => (Photo)x).ToList());
+
+            DisplayAlert("Added", "Selected photos has been added to favorites", "OK");
+
+            Photos.SelectedItems = null;
         }
     }
 }

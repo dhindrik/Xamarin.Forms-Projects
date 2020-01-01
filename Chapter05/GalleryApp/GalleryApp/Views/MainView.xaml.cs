@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using GalleryApp.ViewModels;
 using Xamarin.Forms;
 
 namespace GalleryApp.Views
@@ -10,6 +10,8 @@ namespace GalleryApp.Views
         public MainView()
         {
             InitializeComponent();
+
+            BindingContext = Resolver.Resolve<MainViewModel>();
         }
     }
 }

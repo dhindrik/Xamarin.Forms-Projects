@@ -12,12 +12,20 @@ namespace GalleryApp.Droid
     [Activity(Label = "GalleryApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        public static MainActivity Current { get; private set; }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Current = this;
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            _ = new Bootstrapper();
+
+            global::Xamarin.Forms.Forms.SetFlags("CarouselView_Experimental", "IndicatorView_Experimental");
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
