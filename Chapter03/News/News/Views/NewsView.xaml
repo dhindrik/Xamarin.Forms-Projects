@@ -7,10 +7,7 @@
         <StackLayout Padding="14">
 
              <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
-                             SelectionMode="Single"
-
-                             SelectionChangedCommand="{Binding SelectionChanged}"
-                             SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+                             SelectionMode="Single">
 
                 <CollectionView.EmptyView>
                     <Label Text="Loading" />
