@@ -21,10 +21,9 @@ namespace GalleryApp.Views
             BindingContext = Resolver.Resolve<GalleryViewModel>();
         }
 
-
         private void SelectToolBarItem_Clicked(object sender, EventArgs e)
         {
-            if(!Photos.SelectedItems.Any())
+            if (!Photos.SelectedItems.Any())
             {
                 DisplayAlert("No photos", "No photos selected", "OK");
                 return;

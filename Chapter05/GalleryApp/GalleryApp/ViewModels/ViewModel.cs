@@ -35,7 +35,5 @@ namespace GalleryApp.ViewModels
         }
 
         public bool IsNotBusy => !IsBusy;
-
-
     }
 }

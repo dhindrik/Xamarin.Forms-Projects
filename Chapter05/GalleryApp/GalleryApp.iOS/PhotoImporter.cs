@@ -67,7 +67,6 @@ namespace GalleryApp.iOS
 
                         MainThread.BeginInvokeOnMainThread(() => photos.Add(photo));
                     }
-
                 });
             }
 

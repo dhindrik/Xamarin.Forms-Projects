@@ -7,9 +7,7 @@ namespace GalleryApp.Droid
     {
         protected override void Initialize()
         {
-            base.Initialize();
-
-            ContainerBuilder.RegisterType<PhotoImporter>().As<IPhotoImporter>().SingleInstance();
+            base.Initialize();              ContainerBuilder.RegisterType<PhotoImporter>().As<IPhotoImporter>().SingleInstance();
         }
     }
 }

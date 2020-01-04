@@ -24,7 +24,7 @@ namespace GalleryApp.ViewModels
 
         public async Task Initialize()
         {
-            var photos = await photoImporter.Get(0,20, Quality.Low);
+            var photos = await photoImporter.Get(0, 20, Quality.Low);
 
             Recent = photos;
 
@@ -34,11 +34,10 @@ namespace GalleryApp.ViewModels
 
             MessagingCenter.Subscribe<GalleryViewModel>(this, "FavoritesAdded", (sender) =>
             {
-                MainThread.BeginInvokeOnMainThread(async() =>
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     await LoadFavorites();
                 });
-                
             });
         }
 

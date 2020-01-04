@@ -13,11 +13,11 @@ namespace GalleryApp.Droid
     public class PhotoImporter : IPhotoImporter
     {
         private bool hasCheckedPermission;
-        private string[] result; 
+        private string[] result;
 
         public async Task<ObservableCollection<Photo>> Get(int start, int count, Quality quality = Quality.Low)
         {
-            if(result == null)
+            if (result == null)
             {
                 var succeded = await Import();
 
@@ -27,7 +27,7 @@ namespace GalleryApp.Droid
                 }
             }
 
-            if(result.Length == 0)
+            if (result.Length == 0)
             {
                 return new ObservableCollection<Photo>();
             }
@@ -87,7 +87,7 @@ namespace GalleryApp.Droid
             {
                 var filename = Path.GetFileName(path);
 
-                if(!filenames.Contains(filename))
+                if (!filenames.Contains(filename))
                 {
                     continue;
                 }
@@ -114,7 +114,7 @@ namespace GalleryApp.Droid
         {
             string[] permissions = { Manifest.Permission.ReadExternalStorage };
 
-            if(MainActivity.Current.CheckSelfPermission(Manifest.Permission.ReadExternalStorage) == Permission.Granted)
+            if (MainActivity.Current.CheckSelfPermission(Manifest.Permission.ReadExternalStorage) == Permission.Granted)
             {
                 ContinueWithPermission(true);
 
@@ -123,19 +123,17 @@ namespace GalleryApp.Droid
 
             MainActivity.Current.RequestPermissions(permissions, 33);
 
-            while(hasCheckedPermission)
+            while (hasCheckedPermission)
             {
                 await Task.Delay(100);
             }
 
             return MainActivity.Current.CheckSelfPermission(Manifest.Permission.ReadExternalStorage) == Permission.Granted;
-
-
         }
 
         public bool ContinueWithPermission(bool granted)
         {
-            if(!granted)
+            if (!granted)
             {
                 return false;
             }
