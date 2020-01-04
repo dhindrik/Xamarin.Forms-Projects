@@ -9,7 +9,7 @@ namespace News.Models
         public string Name { get; set; }
     }
 
-    public partial class Article
+    public class Article
     {
         public Source Source { get; set; }
         public string Author { get; set; }

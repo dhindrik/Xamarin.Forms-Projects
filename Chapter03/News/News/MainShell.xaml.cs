@@ -12,8 +12,6 @@ namespace News
         public MainShell()
         {
             InitializeComponent();
-           // BindingContext = viewModel;
-
             Routing.RegisterRoute("articleview", typeof(ArticleView));
         }
     }

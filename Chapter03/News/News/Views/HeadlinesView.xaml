@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:News.Views"
-             x:Name="newsview"
+             x:Name="headlinesview"
              Title="Home"
              x:Class="News.Views.HeadlinesView">
     <ContentPage.Content>
@@ -17,7 +17,7 @@
                         <ContentView>
                             <ContentView.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Command="{Binding BindingContext.ItemSelected, Source={x:Reference newsview}}"
+                                    Command="{Binding BindingContext.ItemSelected, Source={x:Reference headlinesview}}"
                                     CommandParameter="{Binding .}" />
                             </ContentView.GestureRecognizers>
                             <views:ArticleItem />
