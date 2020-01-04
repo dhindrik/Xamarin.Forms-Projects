@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Android;
+using Android.Content.PM;
 using Android.Provider;
-using Android.Support.V4.View;
 using GalleryApp.Models;
 
 namespace GalleryApp.Droid
 {
     public class PhotoImporter : IPhotoImporter
     {
+        private bool hasCheckedPermission;
         private string[] result; 
 
         public async Task<ObservableCollection<Photo>> Get(int start, int count, Quality quality = Quality.Low)
         {
-
             if(result == null)
             {
-                Import();
+                var succeded = await Import();
+
+                if (!succeded)
+                {
+                    return new ObservableCollection<Photo>();
+                }
+            }
+
+            if(result.Length == 0)
+            {
+                return new ObservableCollection<Photo>();
             }
 
             Index startIndex = start;
@@ -59,13 +69,77 @@ namespace GalleryApp.Droid
             return photos;
         }
 
-        public Task<ObservableCollection<Photo>> Get(List<string> filenames, Quality quality = Quality.Low)
+        public async Task<ObservableCollection<Photo>> Get(List<string> filenames, Quality quality = Quality.Low)
         {
-            throw new NotImplementedException();
+            if (result == null)
+            {
+                var succeded = await Import();
+
+                if (!succeded)
+                {
+                    return new ObservableCollection<Photo>();
+                }
+            }
+
+            var photos = new ObservableCollection<Photo>();
+
+            foreach (var path in result)
+            {
+                var filename = Path.GetFileName(path);
+
+                if(!filenames.Contains(filename))
+                {
+                    continue;
+                }
+
+                var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+                var memoryStream = new MemoryStream();
+
+                stream.CopyTo(memoryStream);
+
+                var photo = new Photo()
+                {
+                    Bytes = memoryStream.ToArray(),
+                    Filename = filename
+                };
+
+                photos.Add(photo);
+            }
+
+            return photos;
         }
 
-        private void Import()
+        private async Task<bool> Import()
         {
+            string[] permissions = { Manifest.Permission.ReadExternalStorage };
+
+            if(MainActivity.Current.CheckSelfPermission(Manifest.Permission.ReadExternalStorage) == Permission.Granted)
+            {
+                ContinueWithPermission(true);
+
+                return true;
+            }
+
+            MainActivity.Current.RequestPermissions(permissions, 33);
+
+            while(hasCheckedPermission)
+            {
+                await Task.Delay(100);
+            }
+
+            return MainActivity.Current.CheckSelfPermission(Manifest.Permission.ReadExternalStorage) == Permission.Granted;
+
+
+        }
+
+        public bool ContinueWithPermission(bool granted)
+        {
+            if(!granted)
+            {
+                return false;
+            }
+
             Android.Net.Uri imageUri = MediaStore.Images.Media.ExternalContentUri;
             var cursor = MainActivity.Current.ContentResolver.Query(imageUri, null, MediaStore.Images.ImageColumns.MimeType + "=? or " + MediaStore.Images.ImageColumns.MimeType + "=?", new string[] { "image/jpeg", "image/png" }, MediaStore.Images.ImageColumns.DateModified);
 
@@ -79,6 +153,8 @@ namespace GalleryApp.Droid
             }
 
             result = paths.ToArray();
+
+            return true;
         }
     }
 }

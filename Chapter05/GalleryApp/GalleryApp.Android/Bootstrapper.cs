@@ -9,7 +9,7 @@ namespace GalleryApp.Droid
         {
             base.Initialize();
 
-            ContainerBuilder.RegisterType<PhotoImporter>().As<IPhotoImporter>();
+            ContainerBuilder.RegisterType<PhotoImporter>().As<IPhotoImporter>().SingleInstance();
         }
     }
 }

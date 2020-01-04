@@ -59,6 +59,9 @@
     <PackageReference Include="Autofac">
       <Version>4.9.4</Version>
     </PackageReference>
+    <PackageReference Include="glidex.forms">
+      <Version>2.0.0.336</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

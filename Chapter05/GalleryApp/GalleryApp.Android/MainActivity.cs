@@ -29,11 +29,20 @@ namespace GalleryApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            Android.Glide.Forms.Init(this);
+
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (requestCode == 1)
+            {
+                var importer = (PhotoImporter)Resolver.Resolve<IPhotoImporter>();
+                importer.ContinueWithPermission(grantResults[0] == Permission.Granted);
+            }
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

@@ -24,7 +24,10 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <CollectionView x:Name="Photos" EmptyView="{Binding}" ItemsSource="{Binding Photos}" SelectionMode="Multiple" SelectionChanged="Selection_Changed" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMore}"> 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Select" Clicked="SelectToolBarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    <CollectionView x:Name="Photos" EmptyView="{Binding}" ItemsSource="{Binding Photos}" SelectionMode="Multiple" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMore}"> 
         <CollectionView.ItemsLayout>
             <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="0" />
         </CollectionView.ItemsLayout>
