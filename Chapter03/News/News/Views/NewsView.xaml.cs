@@ -8,6 +8,11 @@ namespace News.Views
 {
     public partial class NewsView : ContentPage
     {
+        //public NewsView()
+        //{
+        //    int i = 42;
+        //}
+
         public NewsView(string scope)
         {
             InitializeComponent();

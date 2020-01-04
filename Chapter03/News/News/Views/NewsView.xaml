@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:News.Views"
+             x:Name="newsview"
              x:Class="News.Views.NewsView">
     <ContentPage.Content>
         <StackLayout Padding="14">
@@ -14,7 +15,14 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <views:ArticleItem />
+                        <ContentView>
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.ItemSelected, Source={x:Reference newsview}}"
+                                    CommandParameter="{Binding .}" />
+                            </ContentView.GestureRecognizers>
+                            <views:ArticleItem />
+                        </ContentView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
