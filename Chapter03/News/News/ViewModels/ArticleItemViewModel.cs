@@ -7,16 +7,16 @@ using Xamarin.Forms;
 
 namespace News.Models
 {
-    // Istället för att skapa en vymodell, men detta känns helt fel :)
-    public partial class Article
-    {
-        public ICommand ViewArticle => new Command(async (item) =>
-        {
-            var selectedArticle = item as Article;
-            var url = HttpUtility.UrlEncode(selectedArticle.Url);
+    //// Istället för att skapa en vymodell, men detta känns helt fel :)
+    //public partial class Article
+    //{
+    //    public ICommand ViewArticle => new Command(async (item) =>
+    //    {
+    //        var selectedArticle = item as Article;
+    //        var url = HttpUtility.UrlEncode(selectedArticle.Url);
 
-            var navigator = new Navigator();
-            await navigator.NavigateTo($"articleview?url={url}");
-        });
-    }
+    //        var navigator = new Navigator();
+    //        await navigator.NavigateTo($"articleview?url={url}");
+    //    });
+    //}
 }

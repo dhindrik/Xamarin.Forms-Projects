@@ -14,11 +14,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ViewArticle}"
-                                      CommandParameter="{Binding .}" />
-            </Grid.GestureRecognizers>
-
             <Label Text="{Binding Title}"
                    Padding="10,0"
                    Grid.Row="1"
@@ -42,7 +37,6 @@
                 <Image Source="{Binding UrlToImage}"
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" />
-
             </Frame>
 
             <BoxView BackgroundColor="LightGray" Grid.Row="4" Grid.ColumnSpan="2" />

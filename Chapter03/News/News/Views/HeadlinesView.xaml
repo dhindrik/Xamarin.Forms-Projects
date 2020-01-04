@@ -2,23 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:News.Views"
+             x:Name="newsview"
              Title="Home"
              x:Class="News.Views.HeadlinesView">
     <ContentPage.Content>
         <StackLayout Padding="14">
 
             <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
-                            SelectionMode="Single"
-                         
-                            SelectionChangedCommand="{Binding SelectionChanged}"
-                            SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+                            SelectionMode="Single">
 
                 <CollectionView.EmptyView>
                     <Label Text="Loading" />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <views:ArticleItem />
+                        <ContentView>
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.ItemSelected, Source={x:Reference newsview}}"
+                                    CommandParameter="{Binding .}" />
+                            </ContentView.GestureRecognizers>
+                            <views:ArticleItem />
+                        </ContentView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 

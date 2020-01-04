@@ -12,6 +12,8 @@ namespace News.ViewModels
     {
         private readonly NewsService newsService;
 
+        public NewsResult CurrentNews { get; set; }
+
         public NewsViewModel(NewsService newsService)
         {
             this.newsService = newsService;
@@ -35,14 +37,12 @@ namespace News.ViewModels
             CurrentNews = await newsService.GetNews(scope);
         }
 
-        public NewsResult CurrentNews { get; set; }
-
-        //public ICommand SelectionChanged
-        //    => new Command(async (selectedItem) =>
-        //    {
-        //        var selectedArticle = selectedItem as Article;
-        //        var url = HttpUtility.UrlEncode(selectedArticle.Url);
-        //        await Navigation.NavigateTo($"articleview?url={url}");
-        //    });
+        public ICommand ItemSelected =>
+            new Command(async (selectedItem) =>
+            {
+                var selectedArticle = selectedItem as Article;
+                var url = HttpUtility.UrlEncode(selectedArticle.Url);
+                await Navigation.NavigateTo($"articleview?url={url}");
+            });
     }
 }
