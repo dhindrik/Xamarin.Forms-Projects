@@ -18,5 +18,16 @@ namespace News.Views
 
             Task.Run(async () => await vm.Initialize(NewsScope.Headlines));
         }
+
+        public HeadlinesView(string scope)
+        {
+            InitializeComponent();
+
+            Title = $"{scope} news";
+
+            var viewModel = Resolver.Resolve<NewsViewModel>();
+            BindingContext = viewModel;
+            Task.Run(async () => await viewModel.Initialize(scope));
+        }
     }
 }

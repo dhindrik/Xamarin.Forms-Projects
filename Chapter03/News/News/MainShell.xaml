@@ -11,11 +11,11 @@
             <ShellContent Title="Local" Route="local" >
                 <ShellContent.ContentTemplate>
                     <DataTemplate>
-                        <views:NewsView>
+                        <views:HeadlinesView>
                             <x:Arguments>
                                 <x:String>Local</x:String>
                             </x:Arguments>
-                        </views:NewsView>
+                        </views:HeadlinesView>
                     </DataTemplate>
                  </ShellContent.ContentTemplate>
                 </ShellContent>
@@ -25,11 +25,11 @@
 
                 <ShellContent.ContentTemplate>
                     <DataTemplate>
-                        <views:NewsView>
+                        <views:HeadlinesView>
                             <x:Arguments>
                                 <x:String>Global</x:String>
                             </x:Arguments>
-                        </views:NewsView>
+                        </views:HeadlinesView>
                     </DataTemplate>
                  </ShellContent.ContentTemplate>
 
