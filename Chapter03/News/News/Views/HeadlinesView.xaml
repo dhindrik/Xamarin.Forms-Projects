@@ -8,9 +8,7 @@
     <ContentPage.Content>
         <StackLayout Padding="14">
 
-            <CollectionView ItemsSource="{Binding CurrentNews.Articles}"
-                            SelectionMode="Single">
-
+            <CollectionView ItemsSource="{Binding CurrentNews.Articles}">
                 <CollectionView.EmptyView>
                     <Label Text="Loading" />
                 </CollectionView.EmptyView>
