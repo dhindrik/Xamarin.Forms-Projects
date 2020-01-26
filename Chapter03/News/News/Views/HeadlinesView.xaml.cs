@@ -12,7 +12,7 @@ namespace News.Views
         public HeadlinesView()
         {
             InitializeComponent();
-            var viewModel = Resolver.Resolve<NewsViewModel>();
+            var viewModel = Resolver.Resolve<HeadlinesViewModel>();
 
             BindingContext = viewModel;
             Task.Run(async () => await viewModel.Initialize(NewsScope.Headlines));
@@ -23,7 +23,7 @@ namespace News.Views
             InitializeComponent();
             Title = $"{scope} news";
 
-            var viewModel = Resolver.Resolve<NewsViewModel>();
+            var viewModel = Resolver.Resolve<HeadlinesViewModel>();
             BindingContext = viewModel;
             Task.Run(async () => await viewModel.Initialize(scope));
         }

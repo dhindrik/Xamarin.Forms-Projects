@@ -8,13 +8,13 @@ using Xamarin.Forms;
 
 namespace News.ViewModels
 {
-    public class NewsViewModel : ViewModel
+    public class HeadlinesViewModel : ViewModel
     {
         private readonly NewsService newsService;
 
         public NewsResult CurrentNews { get; set; }
 
-        public NewsViewModel(NewsService newsService)
+        public HeadlinesViewModel(NewsService newsService)
         {
             this.newsService = newsService;
         }
