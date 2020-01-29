@@ -6,8 +6,6 @@ using GalleryApp.Models;
 using Photos;
 using System.Linq;
 using System.Collections.Generic;
-using Xamarin.Essentials;
-using System.Threading;
 
 namespace GalleryApp.iOS
 {
@@ -19,21 +17,15 @@ namespace GalleryApp.iOS
         {
             if (results == null)
             {
-                var succeded = await Import();
+                var succeeded = await Import();
 
-                if (!succeded)
+                if (!succeeded)
                 {
                     return new ObservableCollection<Photo>();
                 }
             }
 
             var photos = new ObservableCollection<Photo>();
-
-            var options = new PHImageRequestOptions()
-            {
-                NetworkAccessAllowed = true,
-                DeliveryMode = quality == Quality.Low ? PHImageRequestOptionsDeliveryMode.FastFormat : PHImageRequestOptionsDeliveryMode.HighQualityFormat
-            };
 
             Index startIndex = start;
             Index endIndex = start + count;
@@ -45,29 +37,20 @@ namespace GalleryApp.iOS
 
             if (startIndex.Value > endIndex.Value)
             {
-                return new ObservableCollection<Photo>();
+                return photos;
             }
+
+            var options = new PHImageRequestOptions()
+            {
+                NetworkAccessAllowed = true,
+                DeliveryMode = quality == Quality.Low ? PHImageRequestOptionsDeliveryMode.FastFormat : PHImageRequestOptionsDeliveryMode.HighQualityFormat
+            };
 
             foreach (PHAsset asset in results[startIndex..endIndex])
             {
                 var filename = (NSString)asset.ValueForKey((NSString)"filename");
 
-                PHImageManager.DefaultManager.RequestImageForAsset(asset, PHImageManager.MaximumSize, PHImageContentMode.AspectFill, options, (image, info) =>
-                {
-                    using (NSData imageData = image.AsPNG())
-                    {
-                        var bytes = new Byte[imageData.Length];
-                        System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, bytes, 0, Convert.ToInt32(imageData.Length));
-
-                        var photo = new Photo()
-                        {
-                            Bytes = bytes,
-                            Filename = filename
-                        };
-
-                        MainThread.BeginInvokeOnMainThread(() => photos.Add(photo));
-                    }
-                });
+                RequestImage(photos, asset, filename, options);
             }
 
             return photos;
@@ -99,27 +82,31 @@ namespace GalleryApp.iOS
 
                 if (filenames.Contains(filename))
                 {
-                    PHImageManager.DefaultManager.RequestImageForAsset(asset, PHImageManager.MaximumSize, PHImageContentMode.AspectFill, options, (image, info) =>
-                    {
-                        using (NSData imageData = image.AsPNG())
-                        {
-                            var bytes = new Byte[imageData.Length];
-                            System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, bytes, 0, Convert.ToInt32(imageData.Length));
-
-                            var photo = new Photo()
-                            {
-                                Bytes = bytes,
-                                Filename = filename
-                            };
-
-                            MainThread.BeginInvokeOnMainThread(() => photos.Add(photo));
-                        }
-
-                    });
+                    RequestImage(photos, asset, filename, options);
                 }
             }
 
             return photos;
+        }
+
+        private void RequestImage(ObservableCollection<Photo> photos, PHAsset asset, string filename, PHImageRequestOptions options)
+        {
+            PHImageManager.DefaultManager.RequestImageForAsset(asset, PHImageManager.MaximumSize, PHImageContentMode.AspectFill, options, (image, info) =>
+            {
+                using (NSData imageData = image.AsPNG())
+                {
+                    var bytes = new Byte[imageData.Length];
+                    System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, bytes, 0, Convert.ToInt32(imageData.Length));
+
+                    var photo = new Photo()
+                    {
+                        Bytes = bytes,
+                        Filename = filename
+                    };
+
+                    photos.Add(photo);
+                }
+            });
         }
 
         public async Task<bool> Import()

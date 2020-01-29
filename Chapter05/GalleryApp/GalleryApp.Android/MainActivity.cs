@@ -12,7 +12,7 @@ namespace GalleryApp.Droid
     [Activity(Label = "GalleryApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        public static MainActivity Current { get; private set; }
+        public static Activity Current { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
