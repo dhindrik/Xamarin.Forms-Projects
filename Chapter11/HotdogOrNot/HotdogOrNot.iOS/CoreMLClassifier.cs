@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using CoreML;
 using Foundation;
 using ImageIO;
-using UIKit;
 using Vision;
 
 namespace HotdogOrNot.iOS
