@@ -9,7 +9,7 @@
                       Icon="{StaticResource HeadlinesIcon}" />
 
         <Tab Title="News" Route="news" Icon="{StaticResource NewsIcon}">
-            <ShellContent Title="Local" Route="local" >
+            <ShellContent Title="Local" Route="ducklocal" >
                 <ShellContent.ContentTemplate>
                     <DataTemplate>
                         <views:HeadlinesView>
@@ -22,7 +22,7 @@
                 </ShellContent>
 
             <ShellContent Title="Global"
-                          Route="global">
+                          Route="duckglobal">
 
                 <ShellContent.ContentTemplate>
                     <DataTemplate>

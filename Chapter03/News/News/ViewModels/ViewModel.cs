@@ -8,15 +8,6 @@ namespace News.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //public void RaisePropertyChanged(params string[] propertyNames)
-        //{
-        //    foreach (var propertyName in propertyNames)
-        //    {
-        //        PropertyChanged?.Invoke(this,
-        //            new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
-
         public INavigate Navigation { get; set; } = new Navigator();
     }
 }

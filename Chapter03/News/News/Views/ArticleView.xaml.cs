@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using News.ViewModels;
+﻿using System.Web;
 using Xamarin.Forms;
-using System.Web;
 
 namespace News.Views
 {
