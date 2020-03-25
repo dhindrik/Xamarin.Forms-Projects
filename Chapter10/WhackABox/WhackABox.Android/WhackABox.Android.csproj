@@ -52,7 +52,7 @@
       <Version>1.9.67</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.5.0.396</Version>
+      <Version>4.5.0.495</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -91,12 +91,6 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\WhackABox.Lib\WhackABox.Lib.csproj">
-      <Project>{AAB3B532-69B8-4F73-8E99-0F11880459F8}</Project>
-      <Name>WhackABox.Lib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
