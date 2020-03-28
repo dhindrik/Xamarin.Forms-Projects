@@ -60,7 +60,7 @@ namespace WhackABox.Droid
             config.SetUpdateMode(Config.UpdateMode.LatestCameraImage);
         }
 
-        public override void InitializeAR()
+        protected override void InitializeAR()
         {
             arCore = scene.CreateComponent<ARCoreComponent>();
             arCore.ARFrameUpdated += OnARFrameUpdated;
