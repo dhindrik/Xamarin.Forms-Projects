@@ -5,7 +5,7 @@ using Urho.Shapes;
 
 namespace WhackABox
 {
-    public abstract partial class Game : Application
+    public abstract class Game : Application
     {
         protected Scene scene;
         private Camera camera;

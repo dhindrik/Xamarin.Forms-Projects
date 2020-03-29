@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="UrhoSharp.ARCore">
-      <Version>1.9.67</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>4.5.0.495</Version>
+    </PackageReference>
+    <PackageReference Include="UrhoSharp.ARCore">
+      <Version>1.9.67</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
