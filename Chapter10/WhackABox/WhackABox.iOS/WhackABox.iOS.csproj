@@ -162,8 +162,8 @@
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WhackABox.Lib\WhackABox.csproj">
-      <Project>{B92C768B-5F25-4BFC-B043-764A43CC5848}</Project>
+    <ProjectReference Include="..\WhackABox\WhackABox.csproj">
+      <Project>{D41EECF6-810F-450A-9312-D9B084C41448}</Project>
       <Name>WhackABox</Name>
     </ProjectReference>
   </ItemGroup>

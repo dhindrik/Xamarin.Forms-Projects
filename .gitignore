@@ -355,3 +355,5 @@ ASALocalRun/
 
 .DS_Store
 FodyWeavers.xsd
+*.DS_Store
+**/*.DS_Store
