@@ -1,5 +1,4 @@
-﻿#if __IOS__
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
@@ -7,11 +6,15 @@ using ARKit;
 using Urho;
 using Urho.iOS;
 
-namespace WhackABox
+namespace WhackABox.iOS
 {
-    public partial class Game
+    public class Game : WhackABox.Game
     {
         private ARKitComponent arkitComponent;
+
+        public Game(ApplicationOptions options) : base(options)
+        {
+        }
 
         private void SetPositionAndRotation(ARPlaneAnchor anchor, PlaneNode node)
         {
@@ -67,7 +70,7 @@ namespace WhackABox
             }
         }
 
-        private void InitializeAR()
+        protected override void InitializeAR()
         {
             arkitComponent = scene.CreateComponent<ARKitComponent>();
             arkitComponent.Orientation = UIKit.UIInterfaceOrientation.Portrait;
@@ -83,4 +86,3 @@ namespace WhackABox
         }
     }
 }
-#endif

@@ -4,32 +4,33 @@
        x:Class="News.MainShell"
        xmlns:views="clr-namespace:News.Views">
 
-    <FlyoutItem Title="Home" Route="home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22, Color=Black}">
-        <ShellContent ContentTemplate="{DataTemplate views:HomeView}" Title="Home" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf015;', Size=22}" />
+    <FlyoutItem Title="Home" Route="home" Icon="{StaticResource HomeIcon}">
+        <ShellContent ContentTemplate="{DataTemplate views:HeadlinesView}" Title="Headlines"
+                      Icon="{StaticResource HeadlinesIcon}" />
 
-        <Tab Title="News" Route="news" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf1ea;', Size=22}">
-            <ShellContent Title="Local" Route="local" >
+        <Tab Title="News" Route="news" Icon="{StaticResource NewsIcon}">
+            <ShellContent Title="Local" Route="ducklocal" >
                 <ShellContent.ContentTemplate>
                     <DataTemplate>
-                        <views:NewsView>
+                        <views:HeadlinesView>
                             <x:Arguments>
                                 <x:String>Local</x:String>
                             </x:Arguments>
-                        </views:NewsView>
+                        </views:HeadlinesView>
                     </DataTemplate>
                  </ShellContent.ContentTemplate>
                 </ShellContent>
 
             <ShellContent Title="Global"
-                          Route="global">
+                          Route="duckglobal">
 
                 <ShellContent.ContentTemplate>
                     <DataTemplate>
-                        <views:NewsView>
+                        <views:HeadlinesView>
                             <x:Arguments>
                                 <x:String>Global</x:String>
                             </x:Arguments>
-                        </views:NewsView>
+                        </views:HeadlinesView>
                     </DataTemplate>
                  </ShellContent.ContentTemplate>
 
@@ -38,7 +39,7 @@
         
     </FlyoutItem>
 
-     <FlyoutItem Title="Settings" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf013;', Size=22, Color=Black}">
+     <FlyoutItem Title="Settings" Icon="{StaticResource SettingsIcon}">
         <ContentPage Title="Settings">
             <StackLayout Margin="20">
                 <Label Text="Placeholder for settings" FontSize="Caption" />
@@ -47,5 +48,5 @@
         </ContentPage>
     </FlyoutItem>
     
-    <ShellContent ContentTemplate="{DataTemplate views:AboutView}" Title="About" Icon="{FontImage FontFamily={StaticResource IconFont}, Glyph='&#xf05a;', Size=22, Color=Black}" />
+    <ShellContent ContentTemplate="{DataTemplate views:AboutView}" Title="About" Icon="{StaticResource AboutIcon}" />
 </Shell>

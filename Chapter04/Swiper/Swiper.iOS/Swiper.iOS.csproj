@@ -148,12 +148,12 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.396" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Swiper\Swiper.csproj">
-      <Project>{CCD40254-3F0E-4942-9F92-68F0007AE15A}</Project>
+      <Project>{DAFE5282-22EE-400E-835C-7834E5BD8C21}</Project>
       <Name>Swiper</Name>
     </ProjectReference>
   </ItemGroup>

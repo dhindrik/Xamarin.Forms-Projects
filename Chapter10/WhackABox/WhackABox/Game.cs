@@ -5,9 +5,9 @@ using Urho.Shapes;
 
 namespace WhackABox
 {
-    public partial class Game : Application
+    public abstract class Game : Application
     {
-        private Scene scene;
+        protected Scene scene;
         private Camera camera;
         private Viewport viewport;
         private static Random random = new Random();
@@ -18,7 +18,7 @@ namespace WhackABox
         {
         }
 
-        private void CreateSubPlane(PlaneNode planeNode)
+        protected void CreateSubPlane(PlaneNode planeNode)
         {
             var node = planeNode.CreateChild("subplane");
             node.Position = new Vector3(0, 0.05f, 0);
@@ -27,14 +27,14 @@ namespace WhackABox
             box.Color = Color.FromHex("#22ff0000");
         }
 
-        private void UpdateSubPlane(PlaneNode planeNode, Vector3 position)
+        protected void UpdateSubPlane(PlaneNode planeNode, Vector3 position)
         {
             var subPlaneNode = planeNode.GetChild("subplane");
             subPlaneNode.Scale = new Vector3(planeNode.ExtentX, 0.05f, planeNode.ExtentZ);
             subPlaneNode.Position = position;
         }
 
-        private PlaneNode FindNodeByPlaneId(string planeId) =>
+        protected PlaneNode FindNodeByPlaneId(string planeId) =>
                     scene.Children.OfType<PlaneNode>()
                     .FirstOrDefault(e => e.PlaneId == planeId);
 
@@ -76,6 +76,8 @@ namespace WhackABox
 
             InitializeAR();
         }
+
+        protected abstract void InitializeAR();
 
         private void AddBox(PlaneNode planeNode)
         {

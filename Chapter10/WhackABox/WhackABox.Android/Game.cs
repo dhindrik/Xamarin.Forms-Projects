@@ -1,12 +1,15 @@
-﻿#if __ANDROID__
-using Com.Google.AR.Core;
+﻿using Com.Google.AR.Core;
 using Urho;
 using Urho.Droid;
- 
-namespace WhackABox
+
+namespace WhackABox.Droid
 {
-    public partial class Game
+    public class Game : WhackABox.Game
     {
+        public Game(ApplicationOptions options) : base(options)
+        {
+        }
+
         private ARCoreComponent arCore;
 
         private void SetPositionAndRotation(Com.Google.AR.Core.Plane plane, PlaneNode node)
@@ -57,7 +60,7 @@ namespace WhackABox
             config.SetUpdateMode(Config.UpdateMode.LatestCameraImage);
         }
 
-        private void InitializeAR()
+        protected override void InitializeAR()
         {
             arCore = scene.CreateComponent<ARCoreComponent>();
             arCore.ARFrameUpdated += OnARFrameUpdated;
@@ -66,4 +69,3 @@ namespace WhackABox
         }
     }
 }
-#endif
