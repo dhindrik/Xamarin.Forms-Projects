@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:GalleryApp.ViewModels"
              xmlns:converters="clr-namespace:GalleryApp.Converters"
              x:Class="GalleryApp.Views.MainView" Title="My photos">
     <ContentPage.Resources>
@@ -27,7 +26,7 @@
 
         <StackLayout Grid.Row="1">
             <Label Margin="10" Text="Favorites" FontSize="Subtitle" FontAttributes="Bold" />
-            <CarouselView x:Name="Favorites" ItemsSource="{Binding Favorites}" PeekAreaInsets="0,0,40,0">
+            <CarouselView ItemsSource="{Binding Favorites}" PeekAreaInsets="0,0,40,0" IndicatorView="Indicator">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsAlignment="Start" SnapPointsType="MandatorySingle" />
                 </CarouselView.ItemsLayout>
@@ -43,7 +42,7 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            <IndicatorView ItemsSourceBy="Favorites" HorizontalOptions="Center" SelectedIndicatorColor="Red" IndicatorColor="LightGray" />
+            <IndicatorView x:Name="Indicator" HorizontalOptions="Center" SelectedIndicatorColor="Red" IndicatorColor="LightGray" />
         </StackLayout>
     </Grid>
 </ContentPage>

@@ -33,7 +33,7 @@ namespace Chat.Views
         private void Messages_CollectionChanged(object sender,
             System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            MessageList.ScrollTo(viewModel.Messages.Last(), ScrollToPosition.End, true);
+            MessageList.ScrollTo(viewModel.Messages.Last(),null, ScrollToPosition.End, true);
         }
     }
 }

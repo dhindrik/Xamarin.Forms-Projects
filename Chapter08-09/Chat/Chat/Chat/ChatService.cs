@@ -28,7 +28,7 @@ namespace Chat.Chat
                 httpClient = new HttpClient();
             }
 
-            var result = await httpClient.GetStringAsync("https://{theNameOfTheFunctionApp}.azurewebsites.net/api/GetSignalRInfo");
+            var result = await httpClient.GetStringAsync("https://xamarinchatappfunctions.azurewebsites.net/api/GetSignalRInfo");
 
             var info = JsonConvert.DeserializeObject<Models.ConnectionInfo>(result);
 
@@ -59,7 +59,12 @@ namespace Chat.Chat
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            await httpClient.PostAsync("https://{TheNameOfTheFunctionApp}.azurewebsites.net/api/messages", content);
+            if (httpClient == null)
+            {
+                httpClient = new HttpClient();
+            }
+
+            await httpClient.PostAsync("https://xamarinchatappfunctions.azurewebsites.net/api/messages", content);
         }
 
         public async Task Dispose()

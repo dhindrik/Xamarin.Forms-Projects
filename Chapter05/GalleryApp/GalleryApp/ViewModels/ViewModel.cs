@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace GalleryApp.ViewModels
 {
-    public class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

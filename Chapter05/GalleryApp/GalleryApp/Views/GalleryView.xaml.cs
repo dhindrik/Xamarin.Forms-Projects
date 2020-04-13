@@ -10,9 +10,7 @@ namespace GalleryApp.Views
 {
     public partial class GalleryView : ContentPage
     {
-        private ToolbarItem selectToolBarItem;
-
-        private GalleryViewModel ViewModel => BindingContext as GalleryViewModel;
+       
 
         public GalleryView()
         {
@@ -29,11 +27,11 @@ namespace GalleryApp.Views
                 return;
             }
 
-            ViewModel.AddFavorites.Execute(Photos.SelectedItems.Select(x => (Photo)x).ToList());
+            var viewModel = (GalleryViewModel)BindingContext;
+
+            viewModel.AddFavorites.Execute(Photos.SelectedItems.Select(x => (Photo)x).ToList());
 
             DisplayAlert("Added", "Selected photos has been added to favorites", "OK");
-
-            Photos.SelectedItems = null;
         }
     }
 }

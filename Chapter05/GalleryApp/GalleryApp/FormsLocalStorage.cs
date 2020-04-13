@@ -8,13 +8,13 @@ namespace GalleryApp
 {
     public class FormsLocalStorage : ILocalStorage
     {
-        public const string PropertyKey = "FavoritePhotos";
+        public const string FavoritePhotosKey = "FavoritePhotos";
 
         public async Task<List<string>> Get()
         {
-            if (Application.Current.Properties.ContainsKey(PropertyKey))
+            if (Application.Current.Properties.ContainsKey(FavoritePhotosKey))
             {
-                var filenames = (string)Application.Current.Properties[PropertyKey];
+                var filenames = (string)Application.Current.Properties[FavoritePhotosKey];
 
                 return JsonConvert.DeserializeObject<List<string>>(filenames);
             }
@@ -24,11 +24,13 @@ namespace GalleryApp
 
         public async Task Store(string filename)
         {
-            List<string> filenames = await Get();
+            var filenames = await Get();
 
             filenames.Add(filename);
 
-            Application.Current.Properties[PropertyKey] = JsonConvert.SerializeObject(filenames);
+            var json = JsonConvert.SerializeObject(filenames);
+
+            Application.Current.Properties[FavoritePhotosKey] = json;
 
             await Application.Current.SavePropertiesAsync();
         }

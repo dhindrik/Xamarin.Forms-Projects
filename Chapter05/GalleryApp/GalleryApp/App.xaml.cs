@@ -10,9 +10,7 @@ namespace GalleryApp
         {
             InitializeComponent();
 
-            
-
-            MainPage = Resolver.Resolve<MainShell>();
+            MainPage = new MainShell();
         }
 
         protected override void OnStart()

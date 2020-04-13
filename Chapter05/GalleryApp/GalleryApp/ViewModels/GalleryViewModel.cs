@@ -69,9 +69,9 @@ namespace GalleryApp.ViewModels
         });
 
         private int itemsAdded;
-        private void Collection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Collection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs args)
         {
-            foreach(Photo photo in e.NewItems)
+            foreach(Photo photo in args.NewItems)
             {
                 itemsAdded++;
                 Photos.Add(photo);

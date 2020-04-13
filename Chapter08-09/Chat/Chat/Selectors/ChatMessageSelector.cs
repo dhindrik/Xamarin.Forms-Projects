@@ -7,7 +7,7 @@ namespace Chat.Selectors
     {
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            var list = (ListView)container;
+            var list = (CollectionView)container;
 
             if (item is LocalSimpleTextMessage)
             {

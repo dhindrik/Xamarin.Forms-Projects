@@ -39,7 +39,7 @@ namespace GalleryApp.Droid
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            if (requestCode == 1)
+            if (requestCode == 33)
             {
                 var importer = (PhotoImporter)Resolver.Resolve<IPhotoImporter>();
                 importer.ContinueWithPermission(grantResults[0] == Permission.Granted);

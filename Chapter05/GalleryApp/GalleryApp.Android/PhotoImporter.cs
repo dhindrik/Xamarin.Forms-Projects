@@ -81,6 +81,11 @@ namespace GalleryApp.Droid
                 }
             }
 
+            if (result.Length == 0)
+            {
+                return new ObservableCollection<Photo>();
+            }
+
             var photos = new ObservableCollection<Photo>();
 
             foreach (var path in result)
@@ -151,6 +156,8 @@ namespace GalleryApp.Droid
             }
 
             result = paths.ToArray();
+
+            hasCheckedPermission = true;
 
             return true;
         }

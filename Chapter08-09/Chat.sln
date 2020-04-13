@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Functions", "Chat.Functions\Chat.Functions.csproj", "{6A6305E4-B3BD-4B5F-8103-57E80B6B9BD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Functions", "Chat.Functions\Chat.Functions.csproj", "{6A6305E4-B3BD-4B5F-8103-57E80B6B9BD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Messages", "Chat.Messages\Chat.Messages.csproj", "{D5E308E8-8340-4779-A625-17D30F45AA91}"
 EndProject
