@@ -2,64 +2,101 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-
+using System.Runtime.InteropServices;
 using Android.App;
-using Android.Content;
 using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Org.Tensorflow.Contrib.Android;
+using Java.IO;
+using Java.Nio;
+using Java.Nio.Channels;
 
 namespace HotdogOrNot.Droid
 {
     public class TensorflowClassifier : IClassifier
     {
+        public const int FloatSize = 4;
+        public const int PixelSize = 3;
+
         public event EventHandler<ClassificationEventArgs> ClassificationCompleted;
 
         public void Classify(byte[] bytes)
         {
-            var assets = Application.Context.Assets;
+            var mappedByteBuffer = GetModelAsMappedByteBuffer();
+         
+            var interpreter = new Xamarin.TensorFlow.Lite.Interpreter(mappedByteBuffer);
 
-            var inferenceInterface = new TensorFlowInferenceInterface(assets, "hotdog-or-not-model.pb");
+            var tensor = interpreter.GetInputTensor(0);
 
-            var sr = new StreamReader(assets.Open("hotdog-or-not-labels.txt"));
-            var labels = sr.ReadToEnd().Split('\n').Select(s => s.Trim())
-                                        .Where(s => !string.IsNullOrEmpty(s)).ToList();
+            var shape = tensor.Shape();
+            
+            var width = shape[1];
+            var height = shape[2];
 
-            var bitmap = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
-            var resizedBitmap = Bitmap.CreateScaledBitmap(bitmap, 227, 227, false)
-                               .Copy(Bitmap.Config.Argb8888, false);
+            
 
-            var floatValues = new float[227 * 227 * 3];
-            var intValues = new int[227 * 227];
+            var sr = new StreamReader(Application.Context.Assets.Open("hotdog-or-not-labels.txt"));
+            var labels = sr.ReadToEnd().Split('\n').Select(s => s.Trim()).Where(s => !string.IsNullOrEmpty(s)).ToList();
 
-            resizedBitmap.GetPixels(intValues, 0, 227, 0, 0, 227, 227);
+            var outputLocations = new float[1][] { new float[labels.Count] };
 
-            for (int i = 0; i < intValues.Length; ++i)
-            {
-                var val = intValues[i];
-                floatValues[i * 3 + 0] = ((val & 0xFF) - 104);
-                floatValues[i * 3 + 1] = (((val >> 8) & 0xFF) - 117);
-                floatValues[i * 3 + 2] = (((val >> 16) & 0xFF) - 123);
-            }
+            var outputs = Java.Lang.Object.FromArray(outputLocations);
 
-            var outputs = new float[labels.Count];
-            inferenceInterface.Feed("Placeholder", floatValues, 1, 227, 227, 3);
-            inferenceInterface.Run(new[] { "loss" });
-            inferenceInterface.Fetch("loss", outputs);
+            var byteBuffer = GetPhotoAsByteBuffer(bytes, width, height);
+
+            interpreter.Run(byteBuffer, outputs); 
+
+            var predictionResult = outputs.ToArray<float[]>();
 
             var result = new Dictionary<string, float>();
 
             for (var i = 0; i < labels.Count; i++)
             {
                 var label = labels[i];
-                result.Add(label, outputs[i]);
+                result.Add(label, predictionResult[0][i]);
             }
 
             ClassificationCompleted?.Invoke(this, new ClassificationEventArgs(result));
+        }
+
+        private MappedByteBuffer GetModelAsMappedByteBuffer()
+        {
+            var assetDescriptor = Application.Context.Assets.OpenFd("hotdog-or-not-model.tflite");
+            var inputStream = new FileInputStream(assetDescriptor.FileDescriptor);
+
+            var mappedByteBuffer = inputStream.Channel.Map(FileChannel.MapMode.ReadOnly, assetDescriptor.StartOffset, assetDescriptor.DeclaredLength);
+
+            return mappedByteBuffer;
+        }
+
+        private ByteBuffer GetPhotoAsByteBuffer(byte[] bytes, int width, int height)
+        {
+            var modelInputSize = FloatSize * height * width * PixelSize;
+
+            var bitmap = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
+            var resizedBitmap = Bitmap.CreateScaledBitmap(bitmap, width, height, true);
+
+            var byteBuffer = ByteBuffer.AllocateDirect(modelInputSize);
+            byteBuffer.Order(ByteOrder.NativeOrder());
+
+            var pixels = new int[width * height];
+            resizedBitmap.GetPixels(pixels, 0, resizedBitmap.Width, 0, 0, resizedBitmap.Width, resizedBitmap.Height);
+
+            var pixel = 0;
+
+            for (var i = 0; i < width; i++)
+            {
+                for (var j = 0; j < height; j++)
+                {
+                    var pixelVal = pixels[pixel++];
+
+                    byteBuffer.PutFloat(pixelVal >> 16 & 0xFF);
+                    byteBuffer.PutFloat(pixelVal >> 8 & 0xFF);
+                    byteBuffer.PutFloat(pixelVal & 0xFF);
+                }
+            }
+
+            bitmap.Recycle();
+
+            return byteBuffer;
         }
     }
 }
