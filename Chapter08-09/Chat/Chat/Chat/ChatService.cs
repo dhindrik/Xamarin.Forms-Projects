@@ -14,7 +14,7 @@ namespace Chat.Chat
     {
         private HttpClient httpClient;
         private HubConnection hub;
-        private SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
         public event EventHandler<NewMessageEventArgs> NewMessage;
         public bool IsConnected { get; set; }
