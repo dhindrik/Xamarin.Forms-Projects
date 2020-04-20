@@ -35,14 +35,9 @@ namespace HotdogOrNot.ViewModels
 
         private byte[] ReadFully(Stream input)
         {
-            byte[] buffer = new byte[16 * 1024];
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    memoryStream.Write(buffer, 0, read);
-                }
+                input.CopyTo(memoryStream);
 
                 return memoryStream.ToArray();
             }
